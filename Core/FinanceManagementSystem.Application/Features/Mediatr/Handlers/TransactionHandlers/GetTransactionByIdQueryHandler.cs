@@ -31,6 +31,8 @@ namespace FinanceManagementSystem.Application.Features.Mediatr.Handlers.Transact
             return new GetTransactionByIdQueryResult
             {
                 TransactionID = value.TransactionID,
+                CategoryID=value.Category.CategoryID,
+                FinancialAccountID=value.FinancialAccount.FinancialAccountID,
                 Amount = value.Amount,
                 Description = value.Description,
                 TransactionDate = value.TransactionDate,

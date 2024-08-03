@@ -24,7 +24,7 @@ namespace FinanceManagementSystem.Application.Features.Mediatr.Handlers.Transact
             {
                 Amount = request.Amount,
                 Description = request.Description,
-                TransactionDate=DateTime.Now,
+                TransactionDate=request.TransactionDate,
                 CategoryId = request.CategoryId,
                 FinancialAccountId = request.FinancialAccountId,
             });

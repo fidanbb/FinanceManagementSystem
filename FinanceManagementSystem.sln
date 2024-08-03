@@ -5,17 +5,23 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7D73CEA5-DB41-40C6-9026-671FA2C1CCC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManagementSystem.Application", "Core\FinanceManagementSystem.Application\FinanceManagementSystem.Application.csproj", "{68BDF1B4-F5A6-48D7-A79A-23F4DA170B94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceManagementSystem.Application", "Core\FinanceManagementSystem.Application\FinanceManagementSystem.Application.csproj", "{68BDF1B4-F5A6-48D7-A79A-23F4DA170B94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManagementSystem.Domain", "Core\FinanceManagementSystem.Domain\FinanceManagementSystem.Domain.csproj", "{765133AA-F77E-48BB-9BBA-3829A58E1506}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceManagementSystem.Domain", "Core\FinanceManagementSystem.Domain\FinanceManagementSystem.Domain.csproj", "{765133AA-F77E-48BB-9BBA-3829A58E1506}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{AB57E1B1-D232-42ED-AD50-18427B0BA28E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManagementSystem.Persistence", "Infrastructure\FinanceManagementSystem.Persistence\FinanceManagementSystem.Persistence.csproj", "{55075623-A0AD-48DC-9632-4F709EA42AFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceManagementSystem.Persistence", "Infrastructure\FinanceManagementSystem.Persistence\FinanceManagementSystem.Persistence.csproj", "{55075623-A0AD-48DC-9632-4F709EA42AFD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{352DEE1D-0477-43FE-83DF-805BE257BACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManagementSystem.WebApi", "Presentation\FinanceManagementSystem.WebApi\FinanceManagementSystem.WebApi.csproj", "{B7FDFC02-481D-490C-AB9D-89A944AF1794}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceManagementSystem.WebApi", "Presentation\FinanceManagementSystem.WebApi\FinanceManagementSystem.WebApi.csproj", "{B7FDFC02-481D-490C-AB9D-89A944AF1794}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontends", "Frontends", "{5DD7EE57-D0DC-4EA4-A6C4-C10DC0358EBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManagementSystem.Dtos", "Frontends\FinanceManagementSystem.Dtos\FinanceManagementSystem.Dtos.csproj", "{FB61EB84-0ECB-4797-BAC8-ED1B3D11E43B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManagementSystem.WebUI", "Frontends\FinanceManagementSystem.WebUI\FinanceManagementSystem.WebUI.csproj", "{A2F06F26-82AB-4BF5-8255-87C67ABE0B14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,14 @@ Global
 		{B7FDFC02-481D-490C-AB9D-89A944AF1794}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7FDFC02-481D-490C-AB9D-89A944AF1794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7FDFC02-481D-490C-AB9D-89A944AF1794}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB61EB84-0ECB-4797-BAC8-ED1B3D11E43B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB61EB84-0ECB-4797-BAC8-ED1B3D11E43B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB61EB84-0ECB-4797-BAC8-ED1B3D11E43B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB61EB84-0ECB-4797-BAC8-ED1B3D11E43B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2F06F26-82AB-4BF5-8255-87C67ABE0B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F06F26-82AB-4BF5-8255-87C67ABE0B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F06F26-82AB-4BF5-8255-87C67ABE0B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F06F26-82AB-4BF5-8255-87C67ABE0B14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +62,8 @@ Global
 		{765133AA-F77E-48BB-9BBA-3829A58E1506} = {7D73CEA5-DB41-40C6-9026-671FA2C1CCC5}
 		{55075623-A0AD-48DC-9632-4F709EA42AFD} = {AB57E1B1-D232-42ED-AD50-18427B0BA28E}
 		{B7FDFC02-481D-490C-AB9D-89A944AF1794} = {352DEE1D-0477-43FE-83DF-805BE257BACC}
+		{FB61EB84-0ECB-4797-BAC8-ED1B3D11E43B} = {5DD7EE57-D0DC-4EA4-A6C4-C10DC0358EBE}
+		{A2F06F26-82AB-4BF5-8255-87C67ABE0B14} = {5DD7EE57-D0DC-4EA4-A6C4-C10DC0358EBE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10FA30A4-B3F9-4494-9E31-FA4488DB1DFC}

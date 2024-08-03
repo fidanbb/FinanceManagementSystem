@@ -15,6 +15,8 @@ namespace FinanceManagementSystem.Application.Features.Mediatr.Results.Transacti
         public string FinancialAccountName { get; set; }
         public string TransactionType { get; set; }
 
+        public int CategoryID { get; set; }
+        public int FinancialAccountID { get; set; }
         public string OwnerFullName { get; set; }
     }
 }

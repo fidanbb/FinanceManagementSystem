@@ -46,9 +46,9 @@ namespace FinanceManagementSystem.WebApi.Controllers
             return Ok(values);
         }
 
-        [HttpGet("GetTransactiosnByUserId/{userId}")]
+        [HttpGet("GetTransactionsByUserId/{userId}")]
 
-        public async Task<IActionResult> GetTransactiosnByUserId(string userId)
+        public async Task<IActionResult> GetTransactionsByUserId(string userId)
         {
             var values = await _mediator.Send(new GetTransactionsByUserIdQuery(userId));
             return Ok(values);

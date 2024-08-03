@@ -1,0 +1,54 @@
+﻿@model List<GetFinancialAccountsByUserIdDto>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Financial Accounts</h4>
+        <p class="card-subtitle mb-4">
+            You can perform operations such as adding, deleting, updating financial accounts on this page.
+        </p>
+        <a href="/FinancialAccount/CreateFinancialAccount/" class="btn btn-outline-primary">Add New Financial Account</a>
+        <br />
+        <br />
+        <table id="basic-datatable" class="table dt-responsive nowrap">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Financial Account</th>
+                    <th>Balance</th>           
+                    <th>Delete</th>
+                    <th>Update</th>         
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <th>@count</th>
+                        <td>@item.Name</td>
+                        <td>@item.Balance</td>
+                        <td><a href="/FinancialAccount/RemoveFinancialAccount/@item.FinancialAccountID" class="btn btn-outline-danger" 
+                            onclick="return confirm('Are you sure you want to delete this financial account?')">Delete</a></td>
+                        <td><a href="/FinancialAccount/UpdateFinancialAccount/@item.FinancialAccountID" class="btn btn-outline-success">Update</a></td>
+                        <td></td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+
+    </div>
+    <!-- end card-body-->
+</div>
+

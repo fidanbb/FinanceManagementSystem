@@ -27,7 +27,7 @@ namespace FinanceManagementSystem.Application.Features.Mediatr.Handlers.Transact
                TransactionID = value.TransactionID,
                Amount = request.Amount,
                Description = request.Description,
-               TransactionDate=value.TransactionDate,
+               TransactionDate=request.TransactionDate,
                FinancialAccountId = request.FinancialAccountId,
                CategoryId = request.CategoryId,
             });
