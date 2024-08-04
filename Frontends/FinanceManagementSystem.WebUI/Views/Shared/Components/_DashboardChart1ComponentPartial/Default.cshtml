@@ -1,0 +1,50 @@
+﻿﻿﻿<script src="~/chart.js"></script>
+
+@{
+    var income = ViewBag.Income;
+    var expense = ViewBag.Expense;
+}
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title d-inline-block">Last Month Income and Expense</h4>
+
+            <div style="height:300px;">
+                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+                <script>
+                    const xValues = ["Income", "Expence"];
+                    const yValues = [@income, @expense];
+                    const barColors = [
+                        "#b91d47",
+                        "#00aba9",
+                       
+                    ];
+
+                    new Chart("myChart", {
+                        type: "pie",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: barColors,
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: "Last Month Income and Expense"
+                            }
+                        }
+                    });
+                </script>
+
+
+            </div>
+
+           
+        </div>
+    </div>
+</div>

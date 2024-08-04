@@ -69,5 +69,33 @@ namespace FinanceManagementSystem.WebApi.Controllers
             await _mediator.Send(new RemoveTransactionCommand(id));
             return Ok("Transaction removed Successfully");
         }
+
+        [HttpGet("GetTotalIncomeOfTheMonth")]
+        public async Task<IActionResult> GetTotalIncomeOfTheMonth([FromQuery] GetTotalIncomeOfTheMonthQuery request)
+        {
+            var values = await _mediator.Send(request);
+            return Ok(values);
+        }
+
+        [HttpGet("GetTotalExpenseOfTheMonth")]
+        public async Task<IActionResult> GetTotalExpenseOfTheMonth([FromQuery] GetTotalExpenseOfTheMonthQuery request)
+        {
+            var values = await _mediator.Send(request);
+            return Ok(values);
+        }
+
+        [HttpGet("GetLastFiveMonthsIncome/{userId}")]
+        public async Task<IActionResult> GetLastFiveMonthsIncome(string userId)
+        {
+            var values = await _mediator.Send(new GetLast5MonthTotalIncomeQuery(userId));
+            return Ok(values);
+        }
+
+        [HttpGet("GetLastFiveMonthsExpense/{userId}")]
+        public async Task<IActionResult> GetLastFiveMonthsExpense(string userId)
+        {
+            var values = await _mediator.Send(new GetLast5MonthTotalExpenseQuery(userId));
+            return Ok(values);
+        }
     }
 }

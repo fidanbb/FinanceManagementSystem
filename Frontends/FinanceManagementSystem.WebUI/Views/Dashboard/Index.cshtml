@@ -9,10 +9,22 @@
 
     <div class="page-title-right">
         <ol class="breadcrumb m-0">
-            <li class="breadcrumb-item"><a href="javascript: void(0);">Xacton</a></li>
+            <li class="breadcrumb-item"><a href="/FinancialAccount/Index/">Financial Accounts</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
     </div>
 
+</div>
+
+<div class="row">
+    @await Component.InvokeAsync("_DashboardChart1ComponentPartial")
+    @await Component.InvokeAsync("_DashboardChart2ComponentPartial")
+</div>
+
+<div class="row">
+ 
+        @await Component.InvokeAsync("_DashboardChart3ComponentPartial")
+    @await Component.InvokeAsync("_DashboardChart4ComponentPartial")
+   
 </div>
 

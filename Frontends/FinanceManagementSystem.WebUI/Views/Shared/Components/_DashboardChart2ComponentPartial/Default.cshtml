@@ -1,0 +1,51 @@
+﻿﻿﻿<script src="~/chart.js"></script>
+
+@{
+    var income = ViewBag.Income;
+    var expense = ViewBag.Expense;
+}
+
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title d-inline-block">Current Month Income and Expense</h4>
+
+            <div style="height:300px;">
+                <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+
+                <script>
+                    const xValues1 = ["Income", "Expence"];
+                    const yValues1 = [@income, @expense];
+                    const barColors1 = [
+                        "#e8c3b9",
+                        "#1e7145"
+
+                    ];
+
+                    new Chart("myChart1", {
+                        type: "pie",
+                        data: {
+                            labels: xValues1,
+                            datasets: [{
+                                backgroundColor: barColors1,
+                                data: yValues1
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: "Current Month Income and Expense"
+                            }
+                        }
+                    });
+                </script>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+﻿@model List<GetLastFiveMonthIncomeDto>
+
+﻿﻿<script src="~/chart.js"></script>
+
+<style>
+    .chart-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px; /* Added for spacing */
+    }
+</style>
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title d-inline-block">Last 5 Months Income</h4>
+
+            <div style="height:300px;">
+                <div class="chart-container">
+                    <canvas id="myChart2" style="max-width: 500px"></canvas>
+           </div>
+
+                <script>
+                    var xValuesChart2 = @Html.Raw(Json.Serialize(Model.Select(item => item.YearMonth)));
+                    var yValuesChart2 = @Html.Raw(Json.Serialize(Model.Select(item => item.TotalIncome)));
+                    var barColorsChart2 = ["#3366ff", "#6699ff", "#99ccff", "#ccddff", "#cceeff"];
+
+                    new Chart("myChart2", {
+                        type: "bar",
+                        data: {
+                            labels: xValuesChart2,
+                            datasets: [{
+                                backgroundColor: barColorsChart2,
+                                data: yValuesChart2
+                            }]
+                        },
+                        options: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: "Last 5 Months Income"
+                            }
+                        }
+                    });
+
+                </script>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
