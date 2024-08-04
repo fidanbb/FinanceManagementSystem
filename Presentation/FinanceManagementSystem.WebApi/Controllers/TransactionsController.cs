@@ -97,5 +97,12 @@ namespace FinanceManagementSystem.WebApi.Controllers
             var values = await _mediator.Send(new GetLast5MonthTotalExpenseQuery(userId));
             return Ok(values);
         }
+
+        [HttpGet("GetMonthlyReport")]
+        public async Task<IActionResult> GetMonthlyReport([FromQuery] GetReportQuery request)
+        {
+            var values = await _mediator.Send(request);
+            return Ok(values);
+        }
     }
 }

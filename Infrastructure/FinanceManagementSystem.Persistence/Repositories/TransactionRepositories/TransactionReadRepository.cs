@@ -1,4 +1,5 @@
-﻿using FinanceManagementSystem.Application.Dtos.Transactions;
+﻿using FinanceManagementSystem.Application.Dtos.Report;
+using FinanceManagementSystem.Application.Dtos.Transactions;
 using FinanceManagementSystem.Application.Repositories.TransactionRepositories;
 using FinanceManagementSystem.Domain.Entities;
 using FinanceManagementSystem.Persistence.Context;
@@ -67,16 +68,110 @@ namespace FinanceManagementSystem.Persistence.Repositories.TransactionRepositori
             return incomeReports;
         }
 
-        public async Task<decimal> GetTotalExpenseOfTheMonth(string userId, int month)
+        public async Task<GetReportDto> GetMontlyReport(string userId, int month)
         {
             using var context = new AppDbContext();
 
-            var income = await context.Transactions.Include(x => x.FinancialAccount)
+            var expense = await context.Transactions.Include(x => x.FinancialAccount)
                                                  .Where(y => y.FinancialAccount.AppUser.Id == userId &&
                                                     y.CategoryId == 2 && y.TransactionDate.Month == month)
                                                  .SumAsync(z => z.Amount);
 
-            return income;
+            var income = await context.Transactions.Include(x => x.FinancialAccount)
+                                                 .Where(y => y.FinancialAccount.AppUser.Id == userId &&
+                                                    y.CategoryId == 1 && y.TransactionDate.Month == month)
+                                                 .SumAsync(z => z.Amount);
+
+            var netSavings = income - expense;
+
+            var last5IncomeTransactions = context.Transactions.Include(x => x.FinancialAccount)
+                                                    .Include(a=>a.Category)
+                                                 .Where(y => y.FinancialAccount.AppUser.Id == userId &&
+                                                    y.CategoryId == 1 && y.TransactionDate.Month == month)
+                                                 .Take(5)
+                                                 .OrderByDescending(z => z.TransactionDate);
+
+            var last5ExpenseTransactions = context.Transactions.Include(x => x.FinancialAccount)
+                                                 .Include(a => a.Category)
+                                              .Where(y => y.FinancialAccount.AppUser.Id == userId &&
+                                                 y.CategoryId == 2 && y.TransactionDate.Month == month)
+                                              .Take(5)
+                                              .OrderByDescending(z => z.TransactionDate);
+
+            var top5transactions = context.Transactions.Include(x => x.FinancialAccount)
+                                                .Include(a => a.Category)
+                                             .Where(y => y.FinancialAccount.AppUser.Id == userId &&
+                                                y.TransactionDate.Month == month)
+                                             .Take(5)
+                                             .OrderByDescending(z => z.Amount);
+
+            var transactionCount=await context.Transactions.Include(x => x.FinancialAccount)
+                                             .Where(y => y.FinancialAccount.AppUser.Id == userId &&
+                                                y.TransactionDate.Month == month)
+                                             .CountAsync();
+
+            var highestIncomeAmount = await context.Transactions.Include(x => x.FinancialAccount)
+                                             .Where(y => y.FinancialAccount.AppUser.Id == userId &&
+                                                 y.CategoryId == 1 &&
+                                                y.TransactionDate.Month == month)
+                                             .MaxAsync(x => x.Amount);
+
+            var highestExpenseAmount = await context.Transactions.Include(x => x.FinancialAccount)
+                                        .Where(y => y.FinancialAccount.AppUser.Id == userId &&
+                                            y.CategoryId == 2 &&
+                                           y.TransactionDate.Month == month)
+                                        .MaxAsync(x => x.Amount);
+
+
+
+            GetReportDto reportDto = new GetReportDto();
+
+            reportDto.TotalIncome = income;
+            reportDto.TotalExpense = expense;
+            reportDto.NetSavings = netSavings;
+            reportDto.TransactionCount = transactionCount;
+            reportDto.HighestIncomeAmount= highestIncomeAmount;
+            reportDto.HighestExpenseAmount=highestExpenseAmount;
+            reportDto.LastFiveIncomeTransactions = last5IncomeTransactions.Select(x => new GetLast5IncomeTransactionsDto
+            {
+                TransactionID = x.TransactionID,
+                Amount = x.Amount,
+                Description = x.Description,
+                TransactionType=x.Category.Name,
+                TransactionDate = x.TransactionDate,
+            }).ToList();
+
+            reportDto.LastFiveExpenseTransactions = last5ExpenseTransactions.Select(x => new GetLast5ExpenseTransactionsDto
+            {
+                TransactionID = x.TransactionID,
+                Amount = x.Amount,
+                Description = x.Description,
+                TransactionType = x.Category.Name,
+                TransactionDate = x.TransactionDate,
+            }).ToList();
+
+            reportDto.TopFiveTransactions = top5transactions.Select(x => new TopFiveTransactionsDto
+            {
+                TransactionID = x.TransactionID,
+                Amount = x.Amount,
+                Description = x.Description,
+                TransactionType = x.Category.Name,
+                TransactionDate = x.TransactionDate,
+            }).ToList();
+
+            return reportDto;
+        }
+
+        public async Task<decimal> GetTotalExpenseOfTheMonth(string userId, int month)
+        {
+            using var context = new AppDbContext();
+
+            var expense = await context.Transactions.Include(x => x.FinancialAccount)
+                                                 .Where(y => y.FinancialAccount.AppUser.Id == userId &&
+                                                    y.CategoryId == 2 && y.TransactionDate.Month == month)
+                                                 .SumAsync(z => z.Amount);
+
+            return expense;
         }
 
         public async Task<decimal> GetTotalIncomeOfTheMonth(string userId, int month)

@@ -1,0 +1,93 @@
+﻿@model ResultReportDto
+
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/Index.cshtml";
+    int month = ViewBag.Month ;
+    var monthName = CultureInfo.CurrentCulture.
+        DateTimeFormat.GetMonthName(month);
+
+    var year = DateTime.Now.Year;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="clearfix">
+                    <div class="float-left">
+                        <h4><b>Finance Management System - @monthName Report</b></h4>
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <p><strong>Summary for @monthName @year:</strong></p>
+                        <ul>
+                            <li><strong>Total Income for the Month:</strong> $@Model.TotalIncome.ToString("0.00")</li>
+                            <li><strong>Total Expenses for the Month:</strong> $@Model.TotalExpense.ToString("0.00")</li>
+                            <li><strong>Net Savings for the Month:</strong> $@Model.NetSavings.ToString("0.00")</li>
+                        </ul>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Income Transactions (Last 5):</h5>
+                        <ul>
+                            @foreach (var item in Model.LastFiveIncomeTransactions)
+                            {
+                                <li><strong>@item.Description:</strong> $@item.Amount.ToString("0.00") (@item.TransactionType) - @item.TransactionDate.ToString("dd/MM/yyyy")</li>
+
+                            }
+                          
+                        </ul>
+
+                        <h5>Expense Transactions (Last 5):</h5>
+                        <ul>
+                            @foreach (var item in Model.LastFiveExpenseTransactions)
+                            {
+                                <li><strong>@item.Description:</strong> $@item.Amount.ToString("0.00") (@item.TransactionType) - @item.TransactionDate.ToString("dd/MM/yyyy")</li>
+
+                            }
+                        </ul>
+
+                        <h5>Top 5 Transactions:</h5>
+                        <ul>
+                            @foreach (var item in Model.TopFiveTransactions)
+                            {
+                                <li><strong>@item.Description:</strong> $@item.Amount.ToString("0.00") (@item.TransactionType) - @item.TransactionDate.ToString("dd/MM/yyyy")</li>
+
+                            }
+                        </ul>
+
+                        <h5>Monthly Overview:</h5>
+                        <ul>
+                            <li><strong>Total Transactions:</strong> @Model.TransactionCount</li>
+                            <li><strong>Highest Income Amount:</strong> @Model.HighestIncomeAmount</li>
+                            <li><strong>Highest Expense Amount:</strong> @Model.HighestExpenseAmount</li>
+                        </ul>
+
+                        <h5>Insights:</h5>
+                        <ul>
+                            <li>Your total income for the month of July is $@Model.TotalIncome.ToString("0.00").</li>
+                            <li>Your total expenses for the month of July are $@Model.TotalExpense.ToString("0.00").</li>
+                            <li>You saved $@Model.NetSavings.ToString("0.00"), which is approximately @Model.SavingsPercentage.ToString("0.00")% of your total income.</li>
+                        </ul>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+
+                <div class="d-print-none my-4">
+                    <div class="text-right">
+                        <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="fa fa-print m-r-5"></i> Print</a>
+                        <a href="#" class="btn btn-info waves-effect waves-light">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end card-->
+    </div> <!-- end col -->
+</div>
