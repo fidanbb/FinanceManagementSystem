@@ -1,0 +1,27 @@
+﻿@model MailDto
+
+@{
+    ViewData["Title"] = "SendReport";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Sending Report Via Mail</h4>
+        <p class="card-subtitle mb-4">By Entering Receiver's Mail you can send report with email</p>
+        <form method="post">
+            <div class="form-group">
+                <label for="exampleInputName">Receiver's EMail</label>
+                <input type="text" class="form-control" id="exampleInputName" asp-for="ReceiversMail"  placeholder="Please Enter Receiver's Email'">
+                <span class="text-danger" asp-validation-for="ReceiversMail"></span>
+            </div>
+
+           
+            <button type="submit" class="btn btn-primary waves-effect waves-light">Send Report</button>
+            <a href="/Dashoard/Index/" class="btn btn-danger waves-effect waves-light">Cancel</a>
+        </form>
+    </div>
+</div>
+
+

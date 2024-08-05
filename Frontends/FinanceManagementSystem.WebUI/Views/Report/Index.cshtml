@@ -1,93 +1,206 @@
 ﻿@model ResultReportDto
 
-@using System.Globalization
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Layout/Index.cshtml";
-    int month = ViewBag.Month ;
-    var monthName = CultureInfo.CurrentCulture.
-        DateTimeFormat.GetMonthName(month);
+    Layout = null;
 
-    var year = DateTime.Now.Year;
 }
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="clearfix">
-                    <div class="float-left">
-                        <h4><b>Finance Management System - @monthName Report</b></h4>
-                        
-                    </div>
-                    
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+        color: #333;
+        }
+
+        .container {
+        width: 100%;
+        max-width: 70%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+        padding: 10px;
+        text-align: center;
+        background-color: #f8f8f8;
+        border-bottom: 1px solid #ccc;
+        }
+
+        .header h4 {
+        margin: 0;
+        font-size: 24px;
+        }
+
+        .section {
+        margin-top: 20px;
+        }
+
+        .section h5 {
+        font-size: 18px;
+        }
+
+        .section ul {
+        list-style-type: none;
+        padding: 0;
+        }
+
+        .section ul li {
+        margin-bottom: 10px;
+        }
+
+        .button-container {
+        text-align: right;
+        margin-top: 20px;
+        }
+
+        .button-container a {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-left: 10px;
+        }
+
+        .back {
+        background-color: red;
+        }
+
+        .send-button {
+        background-color: #17a2b8;
+        }
+
+        .alert-warning {
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        color: #856404;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        }
+
+        .alert-warning .alert-icon {
+        font-size: 24px;
+        margin-right: 10px;
+        }
+
+        .alert-warning .alert-message {
+        flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <div class="container">
+        @if (Model is not null)
+        {
+            <div class="header">
+                <h4><b>Finance Management System - @Model.Month Report</b></h4>
+            </div>
+
+            <div class="section">
+                <p><strong>Summary for @Model.Month @Model.Year:</strong></p>
+                <ul>
+                    <li><strong>Total Income for the Month:</strong> $@Model.TotalIncome.ToString("0.00")</li>
+                    <li><strong>Total Expenses for the Month:</strong> $@Model.TotalExpense.ToString("0.00")</li>
+                    <li><strong>Net Savings for the Month:</strong> $@Model.NetSavings.ToString("0.00")</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h5>Income Transactions (Last 5):</h5>
+                <ul>
+                    @foreach (var item in Model.LastFiveIncomeTransactions)
+                    {
+                        <li><strong>@item.Description:</strong> $@item.Amount.ToString("0.00") (@item.TransactionType) - @item.TransactionDate.ToString("dd/MM/yyyy")</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="section">
+                <h5>Expense Transactions (Last 5):</h5>
+                <ul>
+                    @foreach (var item in Model.LastFiveExpenseTransactions)
+                    {
+                        <li><strong>@item.Description:</strong> $@item.Amount.ToString("0.00") (@item.TransactionType) - @item.TransactionDate.ToString("dd/MM/yyyy")</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="section">
+                <h5>Top 5 Transactions:</h5>
+                <ul>
+                    @foreach (var item in Model.TopFiveTransactions)
+                    {
+                        <li><strong>@item.Description:</strong> $@item.Amount.ToString("0.00") (@item.TransactionType) - @item.TransactionDate.ToString("dd/MM/yyyy")</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="section">
+                <h5>Monthly Overview:</h5>
+                <ul>
+                    <li><strong>Total Transactions:</strong> @Model.TransactionCount</li>
+                    <li><strong>Highest Income Amount:</strong> @Model.HighestIncomeAmount</li>
+                    <li><strong>Highest Expense Amount:</strong> @Model.HighestExpenseAmount</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h5>Insights:</h5>
+                <ul>
+                    <li>Your total income for the month of @Model.Month is $@Model.TotalIncome.ToString("0.00").</li>
+                    <li>Your total expenses for the month of @Model.Month are $@Model.TotalExpense.ToString("0.00").</li>
+                    <li>You saved $@Model.NetSavings.ToString("0.00"), which is approximately @Model.SavingsPercentage.ToString("0.00")% of your total income.</li>
+                </ul>
+            </div>
+
+            <div class="button-container">
+                <a href="/Dashboard/Index/" class="back">Back To Dashboard</a>
+                <a href="/Report/SendReport/" class="send-button">Send Report Via Mail</a>
+            </div>
+            <div class="footer">
+                <p>&copy; 2024 Finance Management System</p>
+            </div>
+        }
+        else
+        {
+            <div class="alert-warning">
+                <div class="alert-icon">
+                    &#9888; <!-- Warning icon (unicode) -->
                 </div>
-
-                <div class="row mt-4">
-                    <div class="col-6">
-                        <p><strong>Summary for @monthName @year:</strong></p>
-                        <ul>
-                            <li><strong>Total Income for the Month:</strong> $@Model.TotalIncome.ToString("0.00")</li>
-                            <li><strong>Total Expenses for the Month:</strong> $@Model.TotalExpense.ToString("0.00")</li>
-                            <li><strong>Net Savings for the Month:</strong> $@Model.NetSavings.ToString("0.00")</li>
-                        </ul>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <h5>Income Transactions (Last 5):</h5>
-                        <ul>
-                            @foreach (var item in Model.LastFiveIncomeTransactions)
-                            {
-                                <li><strong>@item.Description:</strong> $@item.Amount.ToString("0.00") (@item.TransactionType) - @item.TransactionDate.ToString("dd/MM/yyyy")</li>
-
-                            }
-                          
-                        </ul>
-
-                        <h5>Expense Transactions (Last 5):</h5>
-                        <ul>
-                            @foreach (var item in Model.LastFiveExpenseTransactions)
-                            {
-                                <li><strong>@item.Description:</strong> $@item.Amount.ToString("0.00") (@item.TransactionType) - @item.TransactionDate.ToString("dd/MM/yyyy")</li>
-
-                            }
-                        </ul>
-
-                        <h5>Top 5 Transactions:</h5>
-                        <ul>
-                            @foreach (var item in Model.TopFiveTransactions)
-                            {
-                                <li><strong>@item.Description:</strong> $@item.Amount.ToString("0.00") (@item.TransactionType) - @item.TransactionDate.ToString("dd/MM/yyyy")</li>
-
-                            }
-                        </ul>
-
-                        <h5>Monthly Overview:</h5>
-                        <ul>
-                            <li><strong>Total Transactions:</strong> @Model.TransactionCount</li>
-                            <li><strong>Highest Income Amount:</strong> @Model.HighestIncomeAmount</li>
-                            <li><strong>Highest Expense Amount:</strong> @Model.HighestExpenseAmount</li>
-                        </ul>
-
-                        <h5>Insights:</h5>
-                        <ul>
-                            <li>Your total income for the month of July is $@Model.TotalIncome.ToString("0.00").</li>
-                            <li>Your total expenses for the month of July are $@Model.TotalExpense.ToString("0.00").</li>
-                            <li>You saved $@Model.NetSavings.ToString("0.00"), which is approximately @Model.SavingsPercentage.ToString("0.00")% of your total income.</li>
-                        </ul>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-
-                <div class="d-print-none my-4">
-                    <div class="text-right">
-                        <a href="javascript:window.print()" class="btn btn-primary waves-effect waves-light"><i class="fa fa-print m-r-5"></i> Print</a>
-                        <a href="#" class="btn btn-info waves-effect waves-light">Submit</a>
-                    </div>
+                <div class="alert-message">
+                    <strong>Warning!</strong> You don't have any data in financial accounts or in transactions. Please First add datas then see report!
                 </div>
             </div>
-        </div> <!-- end card-->
-    </div> <!-- end col -->
-</div>
+            <div class="button-container">
+                <a href="/Dashboard/Index/" class="back">Back To Dashboard</a>
+            </div>
+        }
+
+        </div>
+    
+
+   
+
+       
+
+</body>
+</html>
+

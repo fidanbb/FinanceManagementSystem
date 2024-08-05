@@ -16,6 +16,9 @@ namespace FinanceManagementSystem.Dtos.Report
         public decimal HighestExpenseAmount { get; set; }
         public int TransactionCount { get; set; }
 
+        public int Year { get; set; }
+        public string Month { get; set; }
+
         public decimal SavingsPercentage { get; set; }
         public List<GetLast5IncomeTransactionsDto> LastFiveIncomeTransactions { get; set; }
         public List<GetLast5ExpenseTransactionsDto> LastFiveExpenseTransactions { get; set; }
