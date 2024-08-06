@@ -26,11 +26,10 @@ builder.Services.AddHttpClient("ApiClient", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["ApiSettingsKey:BaseUrl"]);
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-});
-//    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-//{
-//    Credentials = new NetworkCredential("11187532", "60-dayfreetrial")
-//});
+}).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+     {
+         Credentials = new NetworkCredential("11187532", "60-dayfreetrial")
+     });
 
 
 builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache

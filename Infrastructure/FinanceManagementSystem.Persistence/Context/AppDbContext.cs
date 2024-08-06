@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FinanceManagementSystem.Persistence.Context
 {
@@ -13,8 +14,10 @@ namespace FinanceManagementSystem.Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-FV06R42;initial Catalog=FinanceManagementDB; " +
-            "integrated Security=true; TrustServerCertificate=true;");
+            //optionsBuilder.UseSqlServer("Server=DESKTOP-FV06R42;initial Catalog=FinanceManagementDB; " +
+            //"integrated Security=true; TrustServerCertificate=true;");
+
+            optionsBuilder.UseSqlServer("Data Source = SQL8010.site4now.net; Initial Catalog = db_aab54c_fidanfinancemsdb; User Id = db_aab54c_fidanfinancemsdb_admin; Password = Fidan1234_");
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<FinancialAccount> FinancialAccounts { get; set; }

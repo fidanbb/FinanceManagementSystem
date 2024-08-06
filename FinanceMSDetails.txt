@@ -1,0 +1,27 @@
+GitHub: https://github.com/fidanbb/FinanceManagementSystem
+Api Deploy Link: http://fidanfidan-001-site1.atempurl.com/api/categories
+UI DeployLink: http://fidanfidanfidan-001-site1.ktempurl.com/
+
+Api and UI Deploy needs authorization:
+
+Api:
+username: 11187532
+password: 60-dayfreetrial
+
+UI:
+username: 11187568
+password: 60-dayfreetrial
+
+Users of Finance Management System:
+
+1) Fidan Bashirova - Admin, Member
+ email:fidan@gmail.com
+ password:Fidan1234_
+
+2) Andy Brown - Member
+ email:andy@gmail.com
+ password:Andy1234_
+
+
+You can also register as a new user. Keep in mind that after registering as a new user if you want to see charts of transactions you need to add data to financialAccounts and Transactions. After you have added income and expense transactions you can see charts and also you can see report of current month and previous month if you have related datas for current and previous month. Also you can send report to your mail address by just writing your email address.
+As current month has not finished yet if you want to see a complete report of existed users please click previous month report.
