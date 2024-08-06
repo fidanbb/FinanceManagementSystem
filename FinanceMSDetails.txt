@@ -20,7 +20,7 @@ Users of Finance Management System:
 
 2) Andy Brown - Member
  email:andy@gmail.com
- password:Andy1234_
+ password:Andy1234_   The user Andy Brown has more datas in it. Report and Charts are more clearly seen in this user.
 
 
 You can also register as a new user. Keep in mind that after registering as a new user if you want to see charts of transactions you need to add data to financialAccounts and Transactions. After you have added income and expense transactions you can see charts and also you can see report of current month and previous month if you have related datas for current and previous month. Also you can send report to your mail address by just writing your email address.
